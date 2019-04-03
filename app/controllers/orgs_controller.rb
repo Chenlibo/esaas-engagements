@@ -1,5 +1,5 @@
 class OrgsController < ApplicationController
-  before_action :set_org, only: [:show, :edit, :update, :destroy]
+  before_action :set_org, only: [:show, :edit, :update, :destroy], except: [:mail]
   before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /orgs
@@ -11,6 +11,9 @@ class OrgsController < ApplicationController
   # GET /orgs/new
   def new
     @org = Org.new
+  end
+
+  def mail_all_orgs
   end
 
   # GET /orgs/1/edit
