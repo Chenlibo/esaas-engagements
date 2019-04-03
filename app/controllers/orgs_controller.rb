@@ -13,6 +13,9 @@ class OrgsController < ApplicationController
     @org = Org.new
   end
 
+  def mail_all_orgs_form
+  end
+
   def mail_all_orgs
   end
 
