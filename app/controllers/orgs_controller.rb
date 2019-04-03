@@ -19,8 +19,16 @@ class OrgsController < ApplicationController
 
    # Post /mail_all_orgs
   def mail_all_orgs
-    puts params
-    redirect_to orgs_path
+    @email_address = params[:email][:address]
+    @subject = params[:email][:subject]
+    @content = params[:email][:content]
+    
+    Org.all.each do |org|
+      puts org.contact.email
+      puts org.contact.name
+      FormMailer.send_form(org.contact.name, org.contact.email, @subject, @content)
+    end
+
   end
 
   # GET /orgs/1/edit
