@@ -13,10 +13,14 @@ class OrgsController < ApplicationController
     @org = Org.new
   end
 
+  # Get /mail_all_orgs
   def mail_all_orgs_form
   end
 
+   # Post /mail_all_orgs
   def mail_all_orgs
+    puts params
+    redirect_to orgs_path
   end
 
   # GET /orgs/1/edit
