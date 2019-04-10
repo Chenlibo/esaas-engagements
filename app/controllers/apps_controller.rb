@@ -6,12 +6,21 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
+
+    @status_map =  App.group(:status).count
+    @vetting_map = App.group(:vetting_status).count
+
+    @status_map.keys.each {|k| @status_map[App.statuses.keys[k]] = @status_map.delete k}
+    @vetting_map.keys.each {|k| @vetting_map[App.vetting_statuses.keys[k]] = @vetting_map.delete k}
+
+
     @current_user = User.find_by_id(session[:user_id])
     @apps = App.all
     respond_to do |format|
       format.json { render :json => @apps.featured }
       format.html
     end
+
   end
 
   # GET /apps/1

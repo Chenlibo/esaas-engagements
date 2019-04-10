@@ -5,12 +5,14 @@
   .help-block Click an App name to see more information
 
 #filters
-  %div Deployment Status:
+  %div 
+    %strong Deployment Status:
   - App.statuses.keys.each do |status|
     = check_box_tag status, 1, true, :class => 'filter'
     %span{:class => status}= status.humanize
   
-  %div Vetting Status:
+  %div 
+    %strong Vetting Status:
   - App.vetting_statuses.keys.each do |vetting_status|
     = check_box_tag vetting_status, 1, true, :class => 'vetting_filter'
     %span{:class => vetting_status}= vetting_status.humanize
@@ -18,6 +20,13 @@
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
       $('.vetting_filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
+%div 
+  %strong Deplpyment Status Counts: 
+  %span= @status_map
+
+%div 
+  %strong Vetting Status Counts:
+  %span= @vetting_map
 
 %table.table.table-condensed#apps_table
   %thead
