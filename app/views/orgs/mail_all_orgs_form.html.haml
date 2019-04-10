@@ -2,6 +2,9 @@
   %h1 Mail to all organizations
 
 = form_tag mail_all_orgs_path do
+  - App.vetting_statuses.keys.each do |vetting_status|
+    = check_box_tag vetting_status, 1, true, :class => 'vetting_filter'
+    %span{:class => vetting_status}= vetting_status.humanize
   .form-group
     =label :email, :address, 'Email Address'
     = text_field :email, :address, :class => 'form-control'

@@ -23,13 +23,23 @@ class OrgsController < ApplicationController
     @subject = params[:email][:subject]
     @content = params[:email][:content]
     
-    Org.all.each do |org|
-      puts org.contact.email
-      puts org.contact.name
-      # FormMailer.mail_all_orgs(org.contact.name, org.contact.email, @subject, @content).deliver_now
+    @vetting_checked = params.select {|k, v| v == "1"}.keys
+    puts @vetting_checked
+    
+    @org_email = nil
+    @org_name =  nil
+    App.all.each do |app|
+      if @vetting_checked.include? app.vetting_status
+        @org_email = app.org.contact.email
+        @org_name = app.org.contact.name
+      end
+      
+      if @org_email != nil && @org_name !=  nil
+        # FormMailer.mail_all_orgs(org.contact.name, org.contact.email, @subject, @content).deliver_now
+      end
     end
 
-    FormMailer.mail_all_orgs('example', 'example@berkeley.edu', @subject, @content).deliver_now
+    # FormMailer.mail_all_orgs('example', 'example@berkeley.edu', @subject, @content).deliver_now
 
 
   end
