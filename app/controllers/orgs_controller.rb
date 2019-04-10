@@ -26,8 +26,11 @@ class OrgsController < ApplicationController
     Org.all.each do |org|
       puts org.contact.email
       puts org.contact.name
-      FormMailer.send_form(org.contact.name, org.contact.email, @subject, @content)
+      # FormMailer.mail_all_orgs(org.contact.name, org.contact.email, @subject, @content).deliver_now
     end
+
+    FormMailer.mail_all_orgs('example', 'example@berkeley.edu', @subject, @content).deliver_now
+
 
   end
 

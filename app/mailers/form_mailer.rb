@@ -14,6 +14,6 @@ class FormMailer < ApplicationMailer
     @org_contact_email = email
     @subject = subject
     @content = content
-    # mail(to: @org_contact_email, subject: subject)
+    mail(to: @org_contact_email, subject: subject)
   end
 end
