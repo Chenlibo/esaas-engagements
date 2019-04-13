@@ -24,7 +24,7 @@ Background: Logged in
 
     And I'm logged in on the apps page
 
-Scenario: search for an app by name
+Scenario: search for an app by name keyword
 	Given I choose "App" 
     And I search app for "1"
 	Then I should see "app 1"
@@ -37,7 +37,7 @@ Scenario: search for an app by name
     And I should see "app 2"
     And I should see "app 3"
 
-Scenario: search for an app by organization
+Scenario: search for an app by organization keyword
     Given I choose "Organization" 
     And I search app for "B"
     Then I should see "app 2"
@@ -50,7 +50,7 @@ Scenario: search for an app by organization
     And I should see "app 2"
     And I should see "app 3"
 
-Scenario: search for an app by description
+Scenario: search for an app by description keyword
     Given I choose "Description" 
     And I search app for "three"
     Then I should see "app 3"
