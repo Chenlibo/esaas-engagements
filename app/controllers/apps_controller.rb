@@ -7,7 +7,30 @@ class AppsController < ApplicationController
   # GET /apps.json
   def index
     @current_user = User.find_by_id(session[:user_id])
-    @apps = App.all
+    @all_selectors = ["App", "Organization" , "Description"]
+    @select = params[:selector] if !params[:selector].nil?
+    @text = params[:text]
+
+    if !@text.nil? && !@text.empty? && @select.nil?
+      flash[:notice] = "Please choose a keyword in the app selector."
+    elsif !@text.nil? && !@text.empty?
+      flash[:notice] = "Search result of #{@text} according to #{@select}."
+    end
+    if @text.nil?
+      @apps = App.all
+    else 
+      case @select
+      when "App"
+        @apps = App.where("lower(name) like ?", "%#{@text.downcase}%")
+      when "Organization"
+        @org_ids = Org.where("lower(name) like ?", "%#{@text.downcase}%").ids
+        @apps = App.where(org_id: @org_ids)
+      when "Description"
+        @apps = App.where("lower(description) like ?", "%#{@text.downcase}%")
+      else
+        @apps = App.all
+      end
+    end
     respond_to do |format|
       format.json { render :json => @apps.featured }
       format.html

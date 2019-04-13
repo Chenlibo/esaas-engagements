@@ -21,8 +21,8 @@ end
 
 Given(/^I search for "([^"]*)"$/) do |arg1|
   # puts body   really good debugging trick
-  fill_in "keyword", with: arg1
-  click_on "Search"
+  fill_in "app_keyword", with: arg1
+  click_on "app_Search"
 end
 
 Given(/^I'm logged in on the orgs page$/) do

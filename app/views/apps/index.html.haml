@@ -4,6 +4,16 @@
     = link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
   .help-block Click an App name to see more information
 
+#selectors
+  = form_tag apps_path, :method => :get do 
+    = label_tag(:text, "Search ") 
+    = text_field_tag :text 
+    according to: 
+    - @all_selectors.each do |key| 
+      = radio_button_tag :selector, key
+      = label :selector, key
+    = submit_tag("go") 
+
 #filters
   %div Deployment Status:
   - App.statuses.keys.each do |status|

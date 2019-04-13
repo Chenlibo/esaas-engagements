@@ -22,16 +22,16 @@ Background: Logged in
         | user2 |                 | test@user.com |
         | user3 |                 | test@user.com |
 
-    And I'm logged in on the orgs page
+    And I'm logged in on the apps page
 
 Scenario: search for an app by name
-	Given I choose "App Name" 
+	Given I choose "App" 
     And I search app for "1"
 	Then I should see "app 1"
 	But I should not see "app 2"
     And I should not see "app 3"
 
-    Given I choose "App Name" 
+    Given I choose "App" 
     And I search app for "app"
     Then I should see "app 1"
     And I should see "app 2"
