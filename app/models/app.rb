@@ -14,7 +14,10 @@ class App < ActiveRecord::Base
   # there should be more efficient ways handling status categorization
   @@VETTING_STATUSES = [:vetting_pending, :on_hold, :staff_approved,:customer_informed, 
     :customer_confirmation_received, :declined_by_staff, :declined_by_customer, :declined_by_customer_available_next_sem, :back_up]
+  @@VETTING_STATUSES_CHECK = ['vetting_pending', 'on_hold', 'staff_approved','customer_informed', 
+    'customer_confirmation_received', 'declined_by_staff', 'declined_by_customer', 'declined_by_customer_available_next_sem', 'back_up']
   @@DEPLOYMENT_STATUSES = [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending]
+  @@DEPLOYMENT_STATUSES = ['dead', 'development', 'in_use', 'in_use_and_wants_improvement', 'inactive_but_wants_improvement', 'pending']
 
   enum comment_type: [:contact_status, :app_functionality, :general, :vetting]
 
@@ -35,8 +38,16 @@ class App < ActiveRecord::Base
     @@VETTING_STATUSES
   end
 
+  def self.getAllVettingStatusesCheck
+    @@VETTING_STATUSES_CHECK
+  end
+
   def self.getAllDeploymentStatuses
     @@DEPLOYMENT_STATUSES
+  end
+
+  def self.getAllDeploymentStatusesCheck
+    @@DEPLOYMENT_STATUSES_CHECK
   end
 
   def inVettingStatus?

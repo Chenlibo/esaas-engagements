@@ -12,7 +12,7 @@ class AppsController < ApplicationController
     @total_deploy = 0
     @total_vet = 0
     @status_map.each do |status, count|
-      if App.getAllVettingStatuses.include? status
+      if App.getAllVettingStatusesCheck.include? App.statuses.keys[status]
         @vetting_map[App.statuses.keys[status]] = count
         @total_vet += count
       else
