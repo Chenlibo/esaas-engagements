@@ -123,7 +123,7 @@ commit `application.yml.asc`.
 
 If you want to have GitHub OAuth on the development environment or on the heroku
 deployment environment, you have to register your app [here](https://github.com/settings/applications/new). After you register and obtain Client ID and Client Secret, add
-the keys to `config/application.yml`
+the keys to `config/application.yml`. Make sure you set the authorization callback URL to `<homepage-url>/auth/github/callback`
 
 ## Setting Environment Variables
 
