@@ -9,7 +9,7 @@
 [Heroku Deployment](https://shielded-sea-54225.herokuapp.com/)
 
 The goal of this currently bare-bones app, thrown together by Armando
-Fox with contributions by [Andrew Halle](https://github.com/andrewhalle), 
+Fox with contributions by [Andrew Halle](https://github.com/andrewhalle),
 is to enable continuous tracking over time of customer apps developed
 by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
 Engineering](https://cs169.saas-class.org).
@@ -218,15 +218,15 @@ bundle exec cucumber --tags ~@javascript
 
 * New `App`, `Org`, and `User` can be created all at once, with proper association
 * Every user can "post" comments on an `App`, `Org`, and `User`
-  - `App` has different types of comments
-  - Any class that inherits `Commentable` can have many comments
+  + `App` has different types of comments
+  + Any class that inherits `Commentable` can have many comments
 * More comprehensive customer feedback through a feedback form with ratings/comments
 * Aggregates customer feedbacks from all iterations of an engagement, and display
 averages on each category
 * `User` supports different types (e.g. Student, Staff/Coach, Customer)
 * Exports `Engagement` information as a CSV file
 * each `User` contains a profile image
-  - we are using Amazon S3 to store images on production environment, because
+  + we are using Amazon S3 to store images on production environment, because
   Heroku has [ephemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
   have to create another Amazon S3 account and setup the configuration([Instruction](https://devcenter.heroku.com/articles/paperclip-s3)).
 * Authorization to edit/destroy only to "Coach"
