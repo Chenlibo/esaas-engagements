@@ -159,6 +159,24 @@ To upload the keys to a Heroku app, run `figaro heroku:set -e production`.
 After setting environment variables using `figaro`, you can access them by
 `ENV["YOURKEY"]` or `Figaro.env.YOURKEY`. Refer the [documentation](https://github.com/laserlemon/figaro) for more information.
 
+## Email Configuration
+
+To enable email delivery functionality, technically you can use any third-party email delivery service as you wish. But the easiest way in this app is to use a [Sendgrid](https://sendgrid.com/) API key by setting
+
+```yaml
+SENDGRID_API_KEY: <your_sendgrid_api_key>
+```
+
+in `config/application.yml`.
+
+For local testing purpose, this is also acceptable:
+
+```zsh
+export SENDGRID_API_KEY='<your_sendgrid_api_key>'
+```
+
+ in your favorite shell.
+
 ## Uploading Images with AWS S3
 
 Since Heroku wipes out all data when dyno server is down, we used AWS S3 Bucket
