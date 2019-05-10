@@ -31,7 +31,7 @@ The main models are:
      * `In use`: In production use at a customer site; customer has not expressed interest in further improvements
      * `In use and wants improvements`: In production, and customer is interested in further development
      * `Inactive but wants improvement`: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
-     * `Pending` (depreciated): a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team. **This has been replaced by the vetting statuses mentioned below. DO NOT use it anymore**
+     * `Pending` (deprecated): a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team. **This has been replaced by the vetting statuses mentioned below. DO NOT use it anymore**
   2. Vetting statuses:
      * `Vetting`: Pending (not yet vetted)
      * `On Hold`: We need something from customer during vetting phase
