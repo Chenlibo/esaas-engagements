@@ -34,22 +34,38 @@ def mail_all_orgs
   @vetting_checked = params.select {|_, v| v == "1"}.keys 
   @org_email = nil
   @org_name =  nil
-  if not params['All'].nil? # selected all organizations
+  nothing_sent = true
+  if not params['All'].nil? # all organizations selected
     Org.all.each do |org|
         @org_email = org.contact.email
         @org_name = org.contact.name
-        FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+        begin
+          FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+          nothing_sent = false
+        rescue StandardError => e
+          flash[:alert] = 'Failed to send'
+        end
     end
   else # selected apps in certain vetting stages 
     App.all.each do |app|
       if @vetting_checked.include? app.status
         @org_email = app.org.contact.email
         @org_name = app.org.contact.name
+        begin
+          FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+          nothing_sent = false
+        rescue StandardError => e
+          flash[:alert] = 'Failed to send'
+        end
       end
-      FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
     end
   end
-  redirect_to orgs_path, notice: 'Sent successfully.' 
+
+  if nothing_sent
+    redirect_to orgs_path, alert: "Please select at least one box"
+  else
+    redirect_to orgs_path, notice: 'Sent successfully.'
+  end
 end
 
   # GET /orgs/1/edit
