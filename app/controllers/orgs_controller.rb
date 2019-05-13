@@ -34,36 +34,11 @@ def mail_all_orgs
   @vetting_checked = params.select {|_, v| v == "1"}.keys 
   @org_email = nil
   @org_name =  nil
-  nothing_sent = true
-  if not params['All'].nil? # all organizations selected
-    Org.all.each do |org|
-        @org_email = org.contact.email
-        @org_name = org.contact.name
-        begin
-          FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
-          nothing_sent = false
-        rescue StandardError => e
-          flash[:alert] = 'Failed to send'
-        end
-    end
-  else # selected apps in certain vetting stages 
-    App.all.each do |app|
-      if @vetting_checked.include? app.status
-        @org_email = app.org.contact.email
-        @org_name = app.org.contact.name
-        begin
-          FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
-          nothing_sent = false
-        rescue StandardError => e
-          flash[:alert] = 'Failed to send'
-        end
-      end
-    end
-  end
-
-  if nothing_sent
+  nothing_to_send = @vetting_checked.empty? && params['All'].nil?
+  if nothing_to_send
     redirect_to orgs_path, alert: "Please select at least one box"
   else
+    send_mail
     redirect_to orgs_path, notice: 'Sent successfully.'
   end
 end
@@ -125,5 +100,22 @@ end
         permit(:name, :description, :url, :contact_id,
       :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct, coach_ids: [])
     end
-      
+
+    def send_mail
+      if not params['All'].nil? # all organizations selected
+        Org.all.each do |org|
+            @org_email = org.contact.email
+            @org_name = org.contact.name
+            FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+        end
+      else # selected apps in certain vetting stages 
+        App.all.each do |app|
+          if @vetting_checked.include? app.status
+            @org_email = app.org.contact.email
+            @org_name = app.org.contact.name
+            FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+          end
+        end
+      end
+    end      
 end

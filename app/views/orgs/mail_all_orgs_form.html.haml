@@ -1,7 +1,7 @@
 .page-header
   %h1 Email to organizations
   .help-block Please specify an email address that organizations should reply to as well as subject and message body
-  .help-block The default reply_to address is "esaas.engagements@gmail.com" if unspecified
+  .help-block Sending large volume of emails can take a while. Please don't refresh or leave this page until completion or failure.
 = form_tag mail_all_orgs_path do
   = check_box_tag "All", 2, true, :class => 'filter'
   %span{:class => "All"}= "All"
