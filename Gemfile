@@ -2,30 +2,30 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.8'
 gem 'omniauth-github'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 2.3', '>= 2.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '>= 2.0.2'
 end
 
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
-  gem 'simplecov', :require => false
+  gem 'simplecov', '>= 0.14.1', :require => false
 end
 
 group :test do
-  gem 'cucumber-rails', :require => false
-  gem 'cucumber-rails-training-wheels'
+  gem 'cucumber-rails', '>= 1.5.0', :require => false
+  gem 'cucumber-rails-training-wheels', '>= 1.0.0'
   gem 'selenium-webdriver', '>=2.35.1'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.6.0'
   gem 'guard-rspec'
-  gem 'factory_girl_rails'
-  gem 'jasmine-rails'
+  gem 'factory_girl_rails', '>= 4.8.0'
+  gem 'jasmine-rails', '>= 0.14.1'
   gem 'database_cleaner'
   gem 'timecop'
 end
@@ -36,22 +36,22 @@ group :production do
 end
 
 gem 'select2-rails', '~> 4.0', '>= 4.0.3'
-gem 'json'
+gem 'json', '>= 2.3.0'
 gem 'figaro'
 gem 'haml'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails'
-gem 'jbuilder', '~> 2.0'
+gem 'coffee-rails', '~> 4.1.1'
+gem 'jquery-rails', '>= 4.3.1'
+gem 'jbuilder', '~> 2.7', '>= 2.7.0'
 gem 'bootstrap_form'
 gem 'paperclip', '~> 5.0.0'
 gem 'aws-sdk', '~> 2.3.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', '~> 0.4.0'
+  gem 'sdoc', '~> 1.0.0'
 end
 
 # Use ActiveModel has_secure_password
